@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Data!</a></p>
+    </div>
+  </div>
+    
+  <div class="container">
+        <!-- Scraped news on mars -->
+        <div class="row">
+            <div class="col-lg-12 mb-6">
+                <h2 class="pt-4">Latest Mars News</h2>
+                <h4>{{ mars.news_title }}</h4>
+                <p>{{ mars.news_p }}</p>
+                <br>
+            </div>
+        </div>
+      
+    <!-- Scraped mars image and facts on mars -->
+        <div class="row">
+            <div class="col-lg-8 mb-6">
+                <h2 class="pt-4">Featured Mars Image</h2>
+                <a href="{{ mars.featured_image_url }}">
+                    <img class="img-responsive" src="{{ mars.featured_image_url }}" alt="Mars Featured Image" style="width:100%">
+                </a>
+            </div>
+            <div class="col-lg-4 mb-6">
+                <h2 class="pt-4">Mars Facts</h2>
+                <table class="table table-sm table-striped table-bordered table-responsibe-lg">
+                    {{ mars.facts_html|safe }}
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+              <h2 class="pt-4 text-center">Mars Hemispheres</h2>
+            </div>
+             {% for hemis in mars.hemisphere_img_urls %}
+                <div class = col-md-6 style="background-color:#fff;">
+                    <div class="card text-white bg-dark" style="margin: 30px;">
+                        <img class="card-img-top" src="{{hemis.img_url}}" alt="Hemisphere Pictures" style="height:30%;width=30%;">
+                    <div class="card-body">
+                        <h4 class = "card-text">{{hemis.title}}</h4>
+                    </div>  
+                    </div>
+                </div>
+            {% endfor %}  
+            </div>
+      </div>
+    
+</body>
+
+</html>
